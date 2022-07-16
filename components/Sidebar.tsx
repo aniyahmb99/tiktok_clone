@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from '../node_modules/next/router';
 import Link from '../node_modules/next/link';
-import GoogleLogin from '../node_modules/react-google-login/index';
-import {
-  AiFillHome,
-  AiOutlineMenu,
-} from '../node_modules/@react-icons/all-files/ai';
-import { ImCancelCircle } from '../node_modules/@react-icons/all-files/im';
+import GoogleLogin from 'react-google-login';
+import { AiFillHome, AiOutlineMenu } from 'react-icons/ai';
+import { ImCancelCircle } from 'react-icons/im';
 import Discover from './Discover';
 import SuggestedAccounts from './SuggestedAccounts';
 import Footer from './Footer';
+import trace from '../pages/_app';
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
