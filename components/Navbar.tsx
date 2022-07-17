@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 import Image from '../node_modules/next/image';
 import Link from '../node_modules/next/link';
 import { useRouter } from '../node_modules/next/router';
@@ -11,8 +11,10 @@ import { IoMdAdd } from 'react-icons/io';
 import Logo from '../utils/tiktik-logo.png';
 import { createOrGetUser } from '../utils';
 
+import useAuthStore from '../store/authStore';
+
 const Navbar = () => {
-  const user = false;
+  const { userProfile, addUser, removeUser } = useAuthStore();
 
   return (
     <div className="w-full flex justify-between items-center border-b-2 border-gray-200 py-2 px-4">
@@ -23,11 +25,42 @@ const Navbar = () => {
       </Link>
       <div>Search</div>
       <div>
-        {user ? (
-          <div>Logged In</div>
+        {userProfile ? (
+          <div className="flex gap-5 md:gap-10">
+            <Link href="/upload">
+              <button className="border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2">
+                <IoMdAdd className="text-xl" /> {` `}
+                <span className="hidden md:block">Upload</span>
+              </button>
+            </Link>
+            {userProfile.image && (
+              <Link href="/">
+                <>
+                  <Image
+                    width={40}
+                    height={40}
+                    className="rounded-full cursor-pointer"
+                    src={userProfile.image}
+                    alt="profile photo"
+                    // layout="responsive"
+                  />
+                </>
+              </Link>
+            )}
+            <button
+              type="button"
+              className="px-2"
+              onClick={() => {
+                googleLogout();
+                removeUser();
+              }}
+            >
+              <AiOutlineLogout color="red" fontSize={21} />
+            </button>
+          </div>
         ) : (
           <GoogleLogin
-            onSuccess={(response) => createOrGetUser(response)}
+            onSuccess={(response) => createOrGetUser(response, addUser)}
             onError={() => console.log('Error')}
           />
         )}
