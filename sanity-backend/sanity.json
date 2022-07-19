@@ -2,7 +2,7 @@
   "root": true,
   "api": {
     "projectId": "bxpmqkml",
-    "dataset": "idk"
+    "dataset": "production"
   },
   "project": {
     "name": "sanity-backend"
