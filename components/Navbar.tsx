@@ -71,7 +71,6 @@ const Navbar = () => {
                     className="rounded-full cursor-pointer"
                     src={userProfile.image}
                     alt="profile photo"
-                    // layout="responsive"
                   />
                 </>
               </Link>
